@@ -1,0 +1,85 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+	<Script file="TitanEquipmentManager.lua"/>
+	
+    <Button name="TitanEquipmentManager_ItemSetButton" virtual="true">
+		<Size x="169" y="22"/>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentBgTop" inherits="Char-Stat-Top" parentKey="BgTop">
+					<Anchors>
+						<Anchor point="TOPLEFT" x="0" y="1"/>
+					</Anchors>
+				</Texture>
+				<Texture name="$parentBgBottom" inherits="Char-Stat-Top" parentKey="BgBottom">
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" x="0" y="-2"/>
+					</Anchors>
+				</Texture>
+				<Texture name="$parentBgMiddle" file="Interface\CharacterFrame\Char-Stat-Middle" parentKey="BgMiddle" vertTile="true">
+					<!--<Size x="169" y="8"/>-->
+					<Anchors>
+						<Anchor point="LEFT" x="1"/>
+						<Anchor point="RIGHT" x="-1"/>
+					</Anchors>
+					<TexCoords left="0.00390625" right="0.66406250" top="0.00000000" bottom="1.00000000"/>
+				</Texture>
+			</Layer>
+c			<Layer level="BORDER">
+				<Texture name="$parentCheck" file="Interface\Buttons\UI-CheckBox-Check" parentKey="Check" hidden="true">
+					<Size x="16" y="16"/>
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset x="8" y="0"/>
+						</Anchor>
+					</Anchors>
+				</Texture>
+                <Texture name="$parentIcon" parentKey="Icon">
+					<Size x="16" y="16"/>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentCheck" relativePoint="RIGHT" x="3" />
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				SetClampedTextureRotation(self.BgBottom, 180)
+			</OnLoad>
+			<OnClick>
+				TitanEquipmentManager:onSetClicked(self)
+			</OnClick>
+		</Scripts>
+		<ButtonText name="$parentTalentSetText" inherits="GameFontNormalSmallLeft" justifyH="LEFT" parentKey="text">
+			<Anchors>
+				<Anchor point="LEFT" relativeTo="$parentIcon" relativePoint="RIGHT" x="3" y="0"/>
+				<Anchor point="RIGHT" x="-3" y="0"/>
+			</Anchors>
+		</ButtonText>
+		<HighlightTexture file="Interface\FriendsFrame\UI-FriendsFrame-HighlightBar-Blue" alphaMode="ADD"/>	
+	</Button>
+                                            
+	<Frame name="TitanEquipmentManagerFrame" parent="UIParent" hidden="true" enableMouse="true" clampedToScreen="true" frameStrata="DIALOG" topLevel="True">
+		<Size>
+			<AbsDimension x="180" y="200"/>
+		</Size>
+		<Backdrop bgFile="Interface\Buttons\white8x8" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+			<EdgeSize><AbsValue val="16"/></EdgeSize>
+			<TileSize><AbsValue val="16"/></TileSize>
+			<BackgroundInsets>
+				<AbsInset left="4" right="4" top="4" bottom="4"/>
+			</BackgroundInsets>
+		</Backdrop>
+		<Scripts>
+			<OnLoad>
+				TitanEquipmentManager:onLoad(self);
+			</OnLoad>
+			<OnEvent>
+				TitanEquipmentManager:onEvent(event, ...)
+			</OnEvent>
+			<OnUpdate>
+				TitanEquipmentManager:onUpdate(elapsed)
+			</OnUpdate>
+		</Scripts>
+	</Frame>		
+	</Ui>
